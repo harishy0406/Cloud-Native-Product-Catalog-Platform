@@ -66,27 +66,68 @@ Top-level layout (high level):
 
 ### Prerequisites
 
-Install the tools required for local development and Kubernetes deployments:
+You’ll need the following installed on your machine:
 
-- Docker (or Docker Desktop)
-- Docker Compose (or Docker Compose V2 via `docker compose`)
-- kubectl (Kubernetes CLI)
-- Optional: Helm for chart packaging
+- Node.js (optional if you just want to run via Docker)
+- Docker
+- Docker Compose
+- Kubernetes CLI (kubectl)
+- Helm (optional) for using Helm charts
 
-### Quickstart — Docker Compose
+### Running Locally with Docker Compose
 
-Clone the repository and start the local services with build:
+1. **Clone this repository**:
 
-```bash
-git clone https://github.com/harishy0406/Cloud-Native-Product-Catalog-Platform.git
-cd Cloud-Native-Product-Catalog-Platform
-docker compose -f compose.yaml up --build
-```
+    ```bash
+    git clone https://github.com/snkshukla/masterclass-sample.git
+    cd masterclass-sample
+    ```
 
-Open http://localhost:3000 in your browser.
+2. **Build and run the containers**:
 
+    ```bash
+    docker-compose -f compose.yaml up --build
+    ```
+
+3. **Access your application**:
+
+    Open your browser and go to:
+
+    ```
+    http://localhost:3000
+    ```
+
+    You should see the Node.js application up and running, connected to its database (if configured in the Compose file).
+
+
+### Deploying on Kubernetes
+
+> Note: Make sure you have a running Kubernetes cluster (either a local tool like minikube, Kind or a cloud provider).
+>
+1. **Apply the basic Kubernetes manifests** (in the `k8s/basic` folder):
+
+    ```bash
+    kubectl apply -f k8s/basic/
+    ```
+
+2. **Check the status**:
+
+    ```bash
+    kubectl get pods
+    kubectl get services
+    ```
+
+3. **(Optional) Port Forward** to access the service locally:
+
+    ```bash
+    kubectl port-forward svc/web 3000:3000
+    ```
+
+4. **Open your browser** to http://localhost:3000 to see the running application.
+5. **Explore advanced Kubernetes** deployments in the `k8s/deployments` folder, or try **Helm charts** in `k8s/helm-chart` to package and deploy your application more efficiently.
 
 ---
+
 
 
 <div align="center">
